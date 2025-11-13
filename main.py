@@ -28,22 +28,13 @@ def generate_content(prompt):
     b64 = base64.b64encode(img_data).decode()
     return title, desc, b64
 
+# MOCK: No real Pinterest API
 def create_pin(title, desc, b64_img, link):
-    url = "https://api.pinterest.com/v5/pins"
-    headers = {"Authorization": f"Bearer {ACCESS_TOKEN}", "Content-Type": "application/json"}
-    data = {
-        "board_id": BOARD_ID,
-        "title": title,
-        "description": desc + f"\n{link}",
-        "link": link,
-        "media_source": {
-            "source_type": "image_base64",
-            "content_type": "image/jpeg",
-            "data": b64_img
-        }
-    }
-    r = requests.post(url, json=data, headers=headers)
-    return r.json()
+    print("MOCK PIN CREATED:")
+    print(f"Title: {title}")
+    print(f"Desc: {desc}\n{link}")
+    print(f"Image: {len(b64_img)} chars (base64)")
+    return {"status": "mock_success", "pin_url": "https://pinterest.com/mock/pin"}
 
 # Test
 if __name__ == "__main__":
